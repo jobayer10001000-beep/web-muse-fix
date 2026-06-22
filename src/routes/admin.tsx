@@ -27,7 +27,7 @@ function AdminLayout() {
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-3xl font-bold">{t("access_denied")}</h1>
           <p className="text-muted-foreground mt-2">Your account does not have admin privileges.</p>
-          <p className="text-xs text-muted-foreground mt-4">Set <code className="text-primary">role: "admin"</code> on <code className="text-primary">users/{user.uid}</code> in Firestore to unlock.</p>
+          <p className="text-xs text-muted-foreground mt-4">If you believe this is an error, contact an existing administrator.</p>
         </div>
       </Layout>
     );
