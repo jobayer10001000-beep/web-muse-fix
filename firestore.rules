@@ -1,0 +1,106 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function userDoc(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+    function roleOf(uid) {
+      return userDoc(uid).role;
+    }
+    function isAdmin() {
+      return isSignedIn() && roleOf(request.auth.uid) == 'admin';
+    }
+    function isMod() {
+      return isSignedIn() && roleOf(request.auth.uid) in ['admin', 'mod'];
+    }
+    // Role / salary fields MUST NOT be writable from the client.
+    function roleUntouched() {
+      return !('role' in request.resource.data) ||
+             resource != null && request.resource.data.role == resource.data.role;
+    }
+    function salaryUntouched() {
+      return !('earnedSalary' in request.resource.data) ||
+             resource != null && request.resource.data.earnedSalary == resource.data.earnedSalary;
+    }
+
+    // ---------- users ----------
+    match /users/{uid} {
+      // A user may read their own profile; admins/mods may read any.
+      allow get: if isSignedIn() && (request.auth.uid == uid || isMod());
+      allow list: if isMod();
+
+      // A user can create their own profile on signup, but cannot set role/salary.
+      allow create: if isSignedIn()
+                    && request.auth.uid == uid
+                    && !('role' in request.resource.data)
+                    && !('earnedSalary' in request.resource.data);
+
+      // Users can update their own profile fields, but NEVER role or earnedSalary.
+      allow update: if isSignedIn()
+                    && request.auth.uid == uid
+                    && roleUntouched()
+                    && salaryUntouched();
+
+      // Only admins may change roles / salaries or write to other users.
+      allow update, create: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- products ----------
+    match /products/{id} {
+      allow read: if true;                 // public catalog
+      allow write: if isAdmin();           // only admins manage products
+    }
+
+    // ---------- categories ----------
+    match /categories/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- settings ----------
+    match /settings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- salary rules ----------
+    match /salaryRules/{id} {
+      allow read: if isMod();
+      allow write: if isAdmin();
+    }
+
+    // ---------- mod payments ledger ----------
+    match /modPayments/{id} {
+      allow read: if isMod();
+      allow write: if isAdmin();
+    }
+
+    // ---------- orders ----------
+    match /orders/{id} {
+      // Owner can read their own order; admins/mods can read all.
+      allow get: if isSignedIn()
+                 && (resource.data.userId == request.auth.uid || isMod());
+      allow list: if isMod();
+
+      // Customer creates their own order. Status/confirmation locked at create.
+      allow create: if isSignedIn()
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.status == 'pending'
+                    && request.resource.data.confirmedBy == null;
+
+      // Only admins/mods may update or delete orders (e.g. status changes).
+      allow update, delete: if isMod();
+    }
+
+    // ---------- default deny ----------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
