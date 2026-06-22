@@ -1,16 +1,36 @@
 #!/usr/bin/env node
-// Transforms Nitro/Vite `dist/` output into Vercel Build Output API v3
-// layout under `.vercel/output/`. Runs after `vite build`.
-import { existsSync, mkdirSync, rmSync, cpSync, writeFileSync } from "node:fs";
+// Ensures Vercel Build Output API v3 exists after `vite build`.
+// Nitro's Vercel preset writes `.vercel/output/` directly; Lovable's sandbox
+// build writes `dist/`, so this script only converts `dist/` as a fallback.
+import { existsSync, mkdirSync, rmSync, cpSync, writeFileSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const root = resolve(process.cwd());
 const dist = join(root, "dist");
 const out = join(root, ".vercel", "output");
+const outConfig = join(out, "config.json");
+
+function readNitroPreset() {
+  try {
+    const nitroJson = JSON.parse(readFileSync(join(dist, "nitro.json"), "utf8"));
+    return typeof nitroJson.preset === "string" ? nitroJson.preset : "";
+  } catch {
+    return "";
+  }
+}
 
 if (!existsSync(dist)) {
-  console.error("[vercel-postbuild] dist/ not found — did `vite build` run?");
+  if (existsSync(outConfig)) {
+    console.log("[vercel-postbuild] Nitro already emitted .vercel/output/; nothing to convert.");
+    process.exit(0);
+  }
+  console.error("[vercel-postbuild] neither dist/ nor .vercel/output/ found — did `vite build` run?");
   process.exit(1);
+}
+
+if (existsSync(outConfig) && readNitroPreset().startsWith("vercel")) {
+  console.log("[vercel-postbuild] Using Nitro's native Vercel output.");
+  process.exit(0);
 }
 
 // Clean previous output
