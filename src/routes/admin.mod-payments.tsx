@@ -5,6 +5,7 @@ import { collection, doc, getDocs, query, updateDoc, where, serverTimestamp } fr
 import { getFirebase } from "../lib/firebase";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/admin/mod-payments")({
   component: ModPayments,
@@ -35,7 +36,7 @@ function ModPayments() {
       await updateDoc(doc(db, "users", uid), { paymentStatus: status, paymentStatusAt: serverTimestamp() });
       toast.success("Payment status updated");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

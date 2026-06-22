@@ -6,6 +6,7 @@ import { uploadImageWithFallback } from "../lib/uploadImage";
 import type { Product } from "../components/ProductCard";
 import { SafeImage } from "../components/SafeImage";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 import { Pencil, Plus, Trash2, Upload } from "lucide-react";
 
 export const Route = createFileRoute("/admin/products")({
@@ -46,7 +47,7 @@ function AdminProducts() {
       const url = await uploadImageWithFallback(file, "products");
       setForm((f) => ({ ...f, image: url }));
       toast.success("Image uploaded");
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
     setUploading(false);
   }
 
@@ -84,7 +85,7 @@ function AdminProducts() {
       }
       setShow(false);
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   async function del(p: Product) {
@@ -94,7 +95,7 @@ function AdminProducts() {
       await deleteDoc(doc(db, "products", p.id));
       toast.success("Deleted");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

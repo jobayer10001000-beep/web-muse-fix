@@ -8,6 +8,7 @@ import { useLang } from "../context/LanguageContext";
 import { getFirebase } from "../lib/firebase";
 import { BD_LOCATIONS, getDistricts, getUpazilas, DIVISIONS } from "../lib/bd-locations";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -109,7 +110,7 @@ function Checkout() {
       router.navigate({ to: "/orders" });
     } catch (err: any) {
       console.error(err);
-      toast.error(err.message || "Failed to place order");
+      toast.error(friendlyError(err, "Failed to place order"));
     }
     setSubmitting(false);
   }
