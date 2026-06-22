@@ -5,6 +5,16 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
+  head: () => ({
+    meta: [
+      { title: "Sign In — ChocoLux" },
+      { name: "description", content: "Sign in to your ChocoLux account to manage orders and continue shopping premium chocolates." },
+      { property: "og:title", content: "Sign In — ChocoLux" },
+      { property: "og:description", content: "Sign in to your ChocoLux account to manage orders and continue shopping." },
+      { property: "og:url", content: "https://web-muse-fix.lovable.app/login" },
+    ],
+    links: [{ rel: "canonical", href: "https://web-muse-fix.lovable.app/login" }],
+  }),
   component: Login,
 });
 

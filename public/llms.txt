@@ -1,0 +1,15 @@
+# ChocoLux
+
+> Luxury handcrafted chocolates, gourmet truffles, and premium gift boxes — made fresh daily and delivered with care.
+
+ChocoLux is an online chocolate boutique offering single-origin cacao creations, signature truffles, and curated gift collections.
+
+## Pages
+
+- [Home](/): Brand story, featured chocolates, and signature collection highlights.
+- [Shop](/shop): Browse the full ChocoLux catalog with search, category filters, and sort.
+
+## Optional
+
+- [Sign In](/login): Customer sign-in for order history and faster checkout.
+- [Create Account](/register): Join ChocoLux to track orders and unlock member benefits.

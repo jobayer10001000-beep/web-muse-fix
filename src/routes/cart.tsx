@@ -4,6 +4,18 @@ import { useCart } from "../context/CartContext";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/cart")({
+  head: () => ({
+    meta: [
+      { title: "Your Cart — ChocoLux" },
+      { name: "description", content: "Review your handcrafted chocolate selections and checkout securely with ChocoLux." },
+      { property: "og:title", content: "Your Cart — ChocoLux" },
+      { property: "og:description", content: "Review your handcrafted chocolate selections and checkout securely with ChocoLux." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://web-muse-fix.lovable.app/cart" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "https://web-muse-fix.lovable.app/cart" }],
+  }),
   component: CartPage,
 });
 
@@ -35,14 +47,14 @@ function CartPage() {
                     <div className="font-semibold truncate">{it.name}</div>
                     <div className="text-sm text-muted-foreground">${it.price.toFixed(2)} each</div>
                     <div className="mt-2 inline-flex items-center glass rounded-full">
-                      <button onClick={() => cart.setQty(it.id, it.qty - 1)} className="p-2"><Minus className="w-3 h-3"/></button>
-                      <span className="px-3 text-sm">{it.qty}</span>
-                      <button onClick={() => cart.setQty(it.id, it.qty + 1)} className="p-2"><Plus className="w-3 h-3"/></button>
+                      <button aria-label={`Decrease quantity of ${it.name}`} onClick={() => cart.setQty(it.id, it.qty - 1)} className="p-2"><Minus className="w-3 h-3" aria-hidden="true"/></button>
+                      <span className="px-3 text-sm" aria-live="polite">{it.qty}</span>
+                      <button aria-label={`Increase quantity of ${it.name}`} onClick={() => cart.setQty(it.id, it.qty + 1)} className="p-2"><Plus className="w-3 h-3" aria-hidden="true"/></button>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="font-bold gold-text">${(it.price * it.qty).toFixed(2)}</div>
-                    <button onClick={() => cart.remove(it.id)} className="mt-2 text-destructive hover:text-destructive/80"><Trash2 className="w-4 h-4"/></button>
+                    <button aria-label={`Remove ${it.name} from cart`} onClick={() => cart.remove(it.id)} className="mt-2 text-destructive hover:text-destructive/80"><Trash2 className="w-4 h-4" aria-hidden="true"/></button>
                   </div>
                 </div>
               ))}

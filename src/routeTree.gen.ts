@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as OrdersRouteImport } from './routes/orders'
@@ -29,6 +30,11 @@ import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminModPaymentsRouteImport } from './routes/admin.mod-payments'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/orders': typeof OrdersRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/mod-payments': typeof AdminModPaymentsRoute
   '/admin/orders': typeof AdminOrdersRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/orders': typeof OrdersRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/mod-payments': typeof AdminModPaymentsRoute
   '/admin/orders': typeof AdminOrdersRoute
@@ -176,6 +184,7 @@ export interface FileRoutesById {
   '/orders': typeof OrdersRoute
   '/register': typeof RegisterRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/mod-payments': typeof AdminModPaymentsRoute
   '/admin/orders': typeof AdminOrdersRoute
@@ -199,6 +208,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/admin/categories'
     | '/admin/mod-payments'
     | '/admin/orders'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/admin/categories'
     | '/admin/mod-payments'
     | '/admin/orders'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/register'
     | '/shop'
+    | '/sitemap.xml'
     | '/admin/categories'
     | '/admin/mod-payments'
     | '/admin/orders'
@@ -262,11 +274,19 @@ export interface RootRouteChildren {
   OrdersRoute: typeof OrdersRoute
   RegisterRoute: typeof RegisterRoute
   ShopRoute: typeof ShopRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -440,6 +460,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrdersRoute: OrdersRoute,
   RegisterRoute: RegisterRoute,
   ShopRoute: ShopRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport

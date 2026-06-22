@@ -10,6 +10,17 @@ import { BD_LOCATIONS, getDistricts, getUpazilas, DIVISIONS } from "../lib/bd-lo
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/checkout")({
+  head: () => ({
+    meta: [
+      { title: "Checkout — ChocoLux" },
+      { name: "description", content: "Complete your ChocoLux order — secure checkout for premium handcrafted chocolate." },
+      { property: "og:title", content: "Checkout — ChocoLux" },
+      { property: "og:description", content: "Complete your ChocoLux order — secure checkout for premium handcrafted chocolate." },
+      { property: "og:url", content: "https://web-muse-fix.lovable.app/checkout" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "https://web-muse-fix.lovable.app/checkout" }],
+  }),
   component: Checkout,
 });
 
