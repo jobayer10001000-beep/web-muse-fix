@@ -47,14 +47,15 @@ export function Layout({ children }: { children: ReactNode }) {
             <button
               onClick={() => setLang(lang === "en" ? "bn" : "en")}
               title={t("language")}
+              aria-label={t("language")}
               className="hidden sm:flex items-center gap-1 text-xs px-2 py-1 rounded-md gold-border hover:bg-primary/10"
             >
               <Globe className="w-3.5 h-3.5"/> {lang === "en" ? "EN" : "বাংলা"}
             </button>
-            <Link to="/cart" className="relative p-2 rounded-md hover:bg-white/5">
-              <ShoppingBag className="w-5 h-5" />
+            <Link to="/cart" aria-label={`${t("cart")} (${count} items)`} className="relative p-2 rounded-md hover:bg-white/5">
+              <ShoppingBag className="w-5 h-5" aria-hidden="true" />
               {count > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span aria-hidden="true" className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {count}
                 </span>
               )}
@@ -64,16 +65,22 @@ export function Layout({ children }: { children: ReactNode }) {
                 onClick={async () => { await logout(); router.navigate({ to: "/" }); }}
                 className="hidden md:flex items-center gap-2 text-sm hover:text-primary max-w-[160px]"
                 title={t("logout")}
+                aria-label={t("logout")}
               >
-                <LogOut className="w-4 h-4 shrink-0" /> <span className="truncate">{user.displayName || t("logout")}</span>
+                <LogOut className="w-4 h-4 shrink-0" aria-hidden="true" /> <span className="truncate">{user.displayName || t("logout")}</span>
               </button>
             ) : (
               <Link to="/login" className="hidden md:flex items-center gap-2 text-sm px-4 py-2 rounded-md gold-border hover:bg-primary/10">
-                <User className="w-4 h-4" /> {t("login")}
+                <User className="w-4 h-4" aria-hidden="true" /> {t("login")}
               </Link>
             )}
-            <button className="md:hidden p-2" onClick={() => setOpen(!open)}>
-              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setOpen(!open)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+            >
+              {open ? <X className="w-5 h-5" aria-hidden="true" /> : <Menu className="w-5 h-5" aria-hidden="true" />}
             </button>
           </div>
         </div>

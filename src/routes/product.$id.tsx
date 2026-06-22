@@ -11,6 +11,17 @@ import type { Product } from "../components/ProductCard";
 import { Minus, Plus, ShoppingBag, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Product ${params.id} — ChocoLux` },
+      { name: "description", content: "Discover this handcrafted luxury chocolate from ChocoLux — premium ingredients, made fresh daily." },
+      { property: "og:title", content: `Product ${params.id} — ChocoLux` },
+      { property: "og:description", content: "Discover this handcrafted luxury chocolate from ChocoLux — premium ingredients, made fresh daily." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: `https://web-muse-fix.lovable.app/product/${params.id}` },
+    ],
+    links: [{ rel: "canonical", href: `https://web-muse-fix.lovable.app/product/${params.id}` }],
+  }),
   component: ProductPage,
 });
 
@@ -66,9 +77,9 @@ function ProductPage() {
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <div className="glass rounded-full flex items-center">
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-3 hover:text-primary"><Minus className="w-4 h-4"/></button>
-              <span className="px-4 font-semibold">{qty}</span>
-              <button onClick={() => setQty(Math.min(p.stock, qty + 1))} className="p-3 hover:text-primary"><Plus className="w-4 h-4"/></button>
+              <button aria-label="Decrease quantity" onClick={() => setQty(Math.max(1, qty - 1))} className="p-3 hover:text-primary"><Minus className="w-4 h-4" aria-hidden="true"/></button>
+              <span className="px-4 font-semibold" aria-live="polite">{qty}</span>
+              <button aria-label="Increase quantity" onClick={() => setQty(Math.min(p.stock, qty + 1))} className="p-3 hover:text-primary"><Plus className="w-4 h-4" aria-hidden="true"/></button>
             </div>
             <button
               disabled={p.stock === 0}

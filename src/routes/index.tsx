@@ -9,8 +9,34 @@ import { Sparkles, Truck, ShieldCheck, Award } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChocoLux — Premium Handcrafted Chocolate" },
-      { name: "description", content: "Discover ChocoLux — luxury handcrafted chocolates and gourmet gift boxes delivered worldwide." },
+      { title: "ChocoLux — Luxury Handcrafted Chocolate & Gift Boxes" },
+      { name: "description", content: "Discover ChocoLux — luxury handcrafted chocolates, gourmet truffles, and premium gift boxes delivered worldwide." },
+      { property: "og:title", content: "ChocoLux — Luxury Handcrafted Chocolate & Gift Boxes" },
+      { property: "og:description", content: "Luxury handcrafted chocolates, gourmet truffles, and premium gift boxes delivered worldwide." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://web-muse-fix.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://web-muse-fix.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "ChocoLux",
+          url: "https://web-muse-fix.lovable.app/",
+          description: "Luxury handcrafted chocolates, gourmet truffles, and premium gift boxes.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "ChocoLux",
+          url: "https://web-muse-fix.lovable.app/",
+        }),
+      },
     ],
   }),
   component: Home,
