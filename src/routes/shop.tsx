@@ -9,9 +9,9 @@ import { Search } from "lucide-react";
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop Premium Chocolates — ChocoLux" },
+      { title: "Shop Premium Chocolates ChocoLux" },
       { name: "description", content: "Browse the full ChocoLux collection of handcrafted luxury chocolates, truffles, and gift boxes — made fresh daily." },
-      { property: "og:title", content: "Shop Premium Chocolates — ChocoLux" },
+      { property: "og:title", content: "Shop Premium Chocolates ChocoLux" },
       { property: "og:description", content: "Browse the full ChocoLux collection of handcrafted luxury chocolates, truffles, and gift boxes." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/shop" },

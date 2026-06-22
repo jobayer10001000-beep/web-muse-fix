@@ -9,9 +9,9 @@ import { friendlyError } from "../lib/errors";
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Create Account — ChocoLux" },
+      { title: "Create Account ChocoLux" },
       { name: "description", content: "Join ChocoLux to enjoy member benefits, faster checkout, and exclusive chocolate releases." },
-      { property: "og:title", content: "Create Account — ChocoLux" },
+      { property: "og:title", content: "Create Account ChocoLux" },
       { property: "og:description", content: "Join ChocoLux for member benefits and exclusive chocolate releases." },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/register" },
     ],

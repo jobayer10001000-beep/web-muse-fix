@@ -10,10 +10,10 @@ import { toast } from "sonner";
 import { friendlyError } from "../lib/errors";
 
 const head = () => ({ meta: [
-  { title: "Admin Live Chat — ChocoLux" },
+  { title: "Admin Live Chat ChocoLux" },
   { name: "description", content: "ChocoLux live chat inbox — reply to customer support conversations in real time." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Live Chat — ChocoLux" },
+  { property: "og:title", content: "Admin Live Chat ChocoLux" },
   { property: "og:description", content: "Reply to customer chats." },
 ] });
 export const Route = createFileRoute("/admin/chats")({ head, component: AdminChats });

@@ -6,9 +6,9 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart — ChocoLux" },
+      { title: "Your Cart ChocoLux" },
       { name: "description", content: "Review your handcrafted chocolate selections and checkout securely with ChocoLux." },
-      { property: "og:title", content: "Your Cart — ChocoLux" },
+      { property: "og:title", content: "Your Cart ChocoLux" },
       { property: "og:description", content: "Review your handcrafted chocolate selections and checkout securely with ChocoLux." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/cart" },

@@ -6,10 +6,10 @@ import { useLang } from "../context/LanguageContext";
 import { DollarSign, Package, ShoppingBag, Users } from "lucide-react";
 
 const head = () => ({ meta: [
-  { title: "Admin Dashboard — ChocoLux" },
+  { title: "Admin Dashboard ChocoLux" },
   { name: "description", content: "ChocoLux admin dashboard overview of store activity, orders and key metrics." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Dashboard — ChocoLux" },
+  { property: "og:title", content: "Admin Dashboard ChocoLux" },
   { property: "og:description", content: "Overview of store activity and key metrics." },
 ] });
 export const Route = createFileRoute("/admin/")({ head,

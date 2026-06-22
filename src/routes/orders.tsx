@@ -8,9 +8,9 @@ import { getFirebase } from "../lib/firebase";
 export const Route = createFileRoute("/orders")({
   head: () => ({
     meta: [
-      { title: "My Orders — ChocoLux" },
+      { title: "My Orders ChocoLux" },
       { name: "description", content: "View your ChocoLux order history and track recent chocolate purchases." },
-      { property: "og:title", content: "My Orders — ChocoLux" },
+      { property: "og:title", content: "My Orders ChocoLux" },
       { property: "og:description", content: "View your ChocoLux order history and track recent chocolate purchases." },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/orders" },
       { name: "robots", content: "noindex" },
