@@ -9,9 +9,9 @@ import { Sparkles, Truck, ShieldCheck, Award } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChocoLux — Luxury Handcrafted Chocolate & Gift Boxes" },
+      { title: "ChocoLux Luxury Handcrafted Chocolate & Gift Boxes" },
       { name: "description", content: "Discover ChocoLux — luxury handcrafted chocolates, gourmet truffles, and premium gift boxes delivered worldwide." },
-      { property: "og:title", content: "ChocoLux — Luxury Handcrafted Chocolate & Gift Boxes" },
+      { property: "og:title", content: "ChocoLux Luxury Handcrafted Chocolate & Gift Boxes" },
       { property: "og:description", content: "Luxury handcrafted chocolates, gourmet truffles, and premium gift boxes delivered worldwide." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/" },

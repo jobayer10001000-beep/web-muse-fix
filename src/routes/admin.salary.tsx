@@ -8,10 +8,10 @@ import { friendlyError } from "../lib/errors";
 import { Trash2 } from "lucide-react";
 
 const head = () => ({ meta: [
-  { title: "Admin Salary Rules — ChocoLux" },
+  { title: "Admin Salary Rules ChocoLux" },
   { name: "description", content: "Configure ChocoLux staff salary rules and moderator commission structure." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Salary Rules — ChocoLux" },
+  { property: "og:title", content: "Admin Salary Rules ChocoLux" },
   { property: "og:description", content: "Configure staff salary rules." },
 ] });
 export const Route = createFileRoute("/admin/salary")({ head,

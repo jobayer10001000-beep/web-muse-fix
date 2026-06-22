@@ -10,10 +10,10 @@ import { friendlyError } from "../lib/errors";
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 
 const head = () => ({ meta: [
-  { title: "Admin Orders — ChocoLux" },
+  { title: "Admin Orders ChocoLux" },
   { name: "description", content: "Review and update customer orders, payments and fulfillment status for ChocoLux." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Orders — ChocoLux" },
+  { property: "og:title", content: "Admin Orders ChocoLux" },
   { property: "og:description", content: "Review and manage customer orders." },
 ] });
 export const Route = createFileRoute("/admin/orders")({ head,

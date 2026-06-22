@@ -5,10 +5,10 @@ import { getFirebase } from "../lib/firebase";
 import { useLang } from "../context/LanguageContext";
 
 const head = () => ({ meta: [
-  { title: "Admin Staff — ChocoLux" },
+  { title: "Admin Staff ChocoLux" },
   { name: "description", content: "Manage ChocoLux staff roles and admin/moderator assignments." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Staff — ChocoLux" },
+  { property: "og:title", content: "Admin Staff ChocoLux" },
   { property: "og:description", content: "Manage staff roles and assignments." },
 ] });
 export const Route = createFileRoute("/admin/staff")({ head,

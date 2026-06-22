@@ -13,9 +13,9 @@ import {
 export const Route = createFileRoute("/support")({
   head: () => ({
     meta: [
-      { title: "Support — ChocoLux" },
+      { title: "Support ChocoLux" },
       { name: "description", content: "Contact ChocoLux support — reach us on social media or chat live with our team." },
-      { property: "og:title", content: "Support — ChocoLux" },
+      { property: "og:title", content: "Support ChocoLux" },
       { property: "og:description", content: "Contact ChocoLux support via social media or live chat." },
       { property: "og:url", content: "https://web-muse-fix.lovable.app/support" },
     ],

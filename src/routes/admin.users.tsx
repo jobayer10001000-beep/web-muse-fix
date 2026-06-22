@@ -6,10 +6,10 @@ import { toast } from "sonner";
 import { friendlyError } from "../lib/errors";
 
 const head = () => ({ meta: [
-  { title: "Admin Users — ChocoLux" },
+  { title: "Admin Users ChocoLux" },
   { name: "description", content: "Manage registered ChocoLux customer accounts and account-level access." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Users — ChocoLux" },
+  { property: "og:title", content: "Admin Users ChocoLux" },
   { property: "og:description", content: "Manage registered customer accounts." },
 ] });
 export const Route = createFileRoute("/admin/users")({ head,

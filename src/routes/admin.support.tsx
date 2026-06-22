@@ -7,10 +7,10 @@ import { friendlyError } from "../lib/errors";
 import { Trash2, Plus, Save } from "lucide-react";
 
 const head = () => ({ meta: [
-  { title: "Admin Support — ChocoLux" },
+  { title: "Admin Support ChocoLux" },
   { name: "description", content: "Manage ChocoLux support page social media links and contact info." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Support — ChocoLux" },
+  { property: "og:title", content: "Admin Support ChocoLux" },
   { property: "og:description", content: "Manage support page social links." },
 ] });
 export const Route = createFileRoute("/admin/support")({ head, component: AdminSupport });

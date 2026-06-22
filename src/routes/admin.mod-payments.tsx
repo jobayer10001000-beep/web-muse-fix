@@ -8,10 +8,10 @@ import { toast } from "sonner";
 import { friendlyError } from "../lib/errors";
 
 const head = () => ({ meta: [
-  { title: "Admin Moderator Payments — ChocoLux" },
+  { title: "Admin Moderator Payments ChocoLux" },
   { name: "description", content: "Review and process payouts to ChocoLux moderators based on tracked activity." },
   { name: "robots", content: "noindex, nofollow" },
-  { property: "og:title", content: "Admin Moderator Payments — ChocoLux" },
+  { property: "og:title", content: "Admin Moderator Payments ChocoLux" },
   { property: "og:description", content: "Process payouts to moderators." },
 ] });
 export const Route = createFileRoute("/admin/mod-payments")({ head,
