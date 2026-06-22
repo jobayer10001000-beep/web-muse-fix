@@ -5,6 +5,7 @@ import { getFirebase } from "../lib/firebase";
 import { uploadImageWithFallback } from "../lib/uploadImage";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 import { Upload } from "lucide-react";
 
 export const Route = createFileRoute("/admin/settings")({
@@ -30,7 +31,7 @@ function AdminSettings() {
       const url = await uploadImageWithFallback(file, "settings");
       setLogoUrl(url);
       toast.success("Uploaded");
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
     setUploading(false);
   }
 
@@ -39,7 +40,7 @@ function AdminSettings() {
       const { db } = getFirebase();
       await setDoc(doc(db, "settings", "site"), { logoUrl, updatedAt: serverTimestamp() }, { merge: true });
       toast.success("Saved — refresh to see new logo");
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

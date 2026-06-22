@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Layout } from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -32,15 +33,15 @@ function Login() {
       await login(email, password);
       toast.success("Welcome back");
       router.navigate({ to: "/" });
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
     setBusy(false);
   }
   async function google() {
-    try { await loginGoogle(); router.navigate({ to: "/" }); } catch (e: any) { toast.error(e.message); }
+    try { await loginGoogle(); router.navigate({ to: "/" }); } catch (e: any) { toast.error(friendlyError(e)); }
   }
   async function reset() {
     if (!email) return toast.error("Enter your email first");
-    try { await resetPassword(email); toast.success("Reset link sent"); } catch (e: any) { toast.error(e.message); }
+    try { await resetPassword(email); toast.success("Reset link sent"); } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

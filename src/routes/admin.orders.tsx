@@ -6,6 +6,7 @@ import { getFirebase } from "../lib/firebase";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/orders")({
@@ -83,7 +84,7 @@ function AdminOrders() {
       }
       toast.success("Status updated");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   async function deleteOrder(o: any) {
@@ -93,7 +94,7 @@ function AdminOrders() {
       await deleteDoc(doc(db, "orders", o.id));
       toast.success("Order deleted");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

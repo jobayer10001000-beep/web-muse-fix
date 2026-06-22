@@ -4,6 +4,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTime
 import { getFirebase } from "../lib/firebase";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/salary")({
@@ -44,7 +45,7 @@ function SalaryRules() {
       setForm({ label: "", minOrderValue: "", maxOrderValue: "", salaryAmount: "" });
       toast.success("Rule added");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   async function del(id: string) {

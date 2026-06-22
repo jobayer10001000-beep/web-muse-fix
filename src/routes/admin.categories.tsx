@@ -4,6 +4,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTime
 import { getFirebase } from "../lib/firebase";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/categories")({
@@ -40,7 +41,7 @@ function AdminCategories() {
       setName("");
       toast.success("Added");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   async function del(id: string) {
@@ -50,7 +51,7 @@ function AdminCategories() {
       await deleteDoc(doc(db, "categories", id));
       toast.success("Deleted");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

@@ -5,6 +5,7 @@ import { getFirebase } from "../lib/firebase";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/admin/payment-method")({
   component: PaymentMethodPage,
@@ -32,7 +33,7 @@ function PaymentMethodPage() {
       toast.success("Submitted");
       setProvider(""); setNumber("");
       await reloadProfile();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
     setBusy(false);
   }
 

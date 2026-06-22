@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getFirebase } from "../lib/firebase";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/admin/users")({
   component: AdminUsers,
@@ -27,7 +28,7 @@ function AdminUsers() {
       await updateDoc(doc(db, "users", uid), { role });
       toast.success("Role updated");
       load();
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
   }
 
   return (

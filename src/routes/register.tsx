@@ -4,6 +4,7 @@ import { Layout } from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { useLang, type Lang } from "../context/LanguageContext";
 import { toast } from "sonner";
+import { friendlyError } from "../lib/errors";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -37,7 +38,7 @@ function Register() {
       await register(email, password, name, chosenLang);
       toast.success(t("create_account"));
       router.navigate({ to: "/" });
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(friendlyError(e)); }
     setBusy(false);
   }
 
@@ -70,7 +71,7 @@ function Register() {
             <button disabled={busy} className="w-full px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50">{busy ? t("creating") : t("create_account")}</button>
           </form>
           <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground"><div className="flex-1 h-px bg-white/10"/>OR<div className="flex-1 h-px bg-white/10"/></div>
-          <button onClick={async () => { try { setLang(chosenLang); await loginGoogle(); router.navigate({ to: "/" }); } catch (e: any) { toast.error(e.message); } }} className="w-full px-6 py-3 rounded-full gold-border hover:bg-primary/10 font-medium">{t("continue_with_google")}</button>
+          <button onClick={async () => { try { setLang(chosenLang); await loginGoogle(); router.navigate({ to: "/" }); } catch (e: any) { toast.error(friendlyError(e)); } }} className="w-full px-6 py-3 rounded-full gold-border hover:bg-primary/10 font-medium">{t("continue_with_google")}</button>
           <p className="mt-6 text-sm text-center text-muted-foreground">{t("already_have_account")} <Link to="/login" className="text-primary hover:underline">{t("login")}</Link></p>
         </div>
       </section>
