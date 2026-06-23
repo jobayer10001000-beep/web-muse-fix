@@ -40,8 +40,8 @@ function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {cart.items.map((it) => (
                 <div key={it.id} className="glass rounded-2xl p-4 flex gap-4 items-center">
-                  <div className="w-24 h-24 rounded-xl overflow-hidden bg-muted shrink-0">
-                    {it.image ? <img src={it.image} alt={it.name} className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-3xl">🍫</div>}
+                  <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0">
+                    {it.image ? <img src={it.image} alt={it.name} className="w-full h-full object-contain"/> : <div className="w-full h-full flex items-center justify-center text-3xl">🍫</div>}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="font-semibold truncate">{it.name}</div>
