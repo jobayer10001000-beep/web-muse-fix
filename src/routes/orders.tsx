@@ -67,7 +67,7 @@ function Orders() {
                 <div className="mt-4 grid sm:grid-cols-2 md:grid-cols-3 gap-2 text-sm">
                   {o.items.map((it: any) => (
                     <div key={it.id} className="flex gap-2 items-center">
-                      <div className="w-12 h-12 rounded bg-muted overflow-hidden">{it.image && <img src={it.image} className="w-full h-full object-cover"/>}</div>
+                      <div className="w-12 h-12 rounded overflow-hidden">{it.image && <img src={it.image} className="w-full h-full object-contain"/>}</div>
                       <div className="truncate"><div className="truncate">{it.name}</div><div className="text-muted-foreground">× {it.qty}</div></div>
                     </div>
                   ))}
