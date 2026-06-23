@@ -108,8 +108,8 @@ function ProductPage() {
   return (
     <Layout>
       <section className="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-12">
-        <div className="glass rounded-3xl overflow-hidden aspect-square">
-          <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover" fallback={<span className="text-9xl">🍫</span>} />
+        <div className="rounded-3xl overflow-hidden aspect-square">
+          <SafeImage src={p.image} alt={p.name} className="w-full h-full object-contain" fallback={<span className="text-9xl">🍫</span>} />
         </div>
         <div>
           {p.category && <div className="text-xs uppercase tracking-[0.3em] text-primary">{p.category}</div>}
