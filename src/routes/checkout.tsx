@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { addDoc, collection, doc, runTransaction, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { Layout } from "../components/Layout";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
