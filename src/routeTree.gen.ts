@@ -33,7 +33,6 @@ import { Route as AdminModPaymentsRouteImport } from './routes/admin.mod-payment
 import { Route as AdminDeliveryRouteImport } from './routes/admin.delivery'
 import { Route as AdminChatsRouteImport } from './routes/admin.chats'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
-import { Route as AdminDeliveryRouteImport } from './routes/admin.delivery'
 
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
@@ -155,6 +154,12 @@ const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
   path: '/categories',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminDeliveryRoute = AdminDeliveryRouteImport.update({
+  id: '/delivery',
+  path: '/delivery',
+  getParentRoute: () => AdminRoute,
+} as any)
+
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
