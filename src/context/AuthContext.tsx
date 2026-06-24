@@ -115,8 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { auth } = getFirebase();
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       if (name) await updateProfile(cred.user, { displayName: name });
-      // ensure profile doc with language preference
-      try { await loadProfile(cred.user, language); } catch {}
+      try { await loadProfile(cred.user, language, name); } catch {}
     },
     async loginGoogle() {
       const { auth } = getFirebase();
