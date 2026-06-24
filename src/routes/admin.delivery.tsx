@@ -111,7 +111,7 @@ function AdminDelivery() {
             </div>
             <div className="glass rounded-xl p-4">
               <div className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Delivery charge</div>
-              <div className="text-lg font-semibold gold-text">৳{qInfo.charge.toFixed(2)}</div>
+              <div className="text-lg font-semibold gold-text">${qInfo.charge.toFixed(2)}</div>
             </div>
             <div className="glass rounded-xl p-4 sm:col-span-3">
               <div className="text-xs text-muted-foreground uppercase tracking-widest mb-2">Upazilas / Thanas ({qInfo.upazilas.length})</div>
@@ -130,13 +130,13 @@ function AdminDelivery() {
         <h2 className="text-xl font-bold mb-4">Default charges</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-xs text-muted-foreground">Default delivery charge (৳)</label>
+            <label className="text-xs text-muted-foreground">Default delivery charge ($)</label>
             <input type="number" min={0} value={doc1.defaultCharge}
               onChange={(e) => setDoc1({ ...doc1, defaultCharge: Number(e.target.value) || 0 })}
               className={inputCls}/>
           </div>
           <div>
-            <label className="text-xs text-muted-foreground">Free delivery above subtotal (৳) — 0 to disable</label>
+            <label className="text-xs text-muted-foreground">Free delivery above subtotal ($) — 0 to disable</label>
             <input type="number" min={0} value={doc1.freeAbove ?? 0}
               onChange={(e) => setDoc1({ ...doc1, freeAbove: Number(e.target.value) || 0 })}
               className={inputCls}/>
