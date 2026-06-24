@@ -98,7 +98,10 @@ service cloud.firestore {
       // Owner can read their own order; admins/mods can read all.
       allow get: if isSignedIn()
                  && (resource.data.userId == request.auth.uid || isMod());
-      allow list: if isMod();
+      allow list: if isSignedIn() && (isMod() || (
+        request.query.limit <= 1000
+        && resource.data.userId == request.auth.uid
+      ));
 
       // Customer creates their own order. Status/confirmation locked at create.
       allow create: if isSignedIn()
