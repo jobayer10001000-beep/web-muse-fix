@@ -146,6 +146,14 @@ function Checkout() {
         orderIds: arrayUnion(orderRef.id),
         updatedAt: serverTimestamp(),
       }).catch((e) => console.warn("order id save skipped", e));
+      try {
+        const key = `chocolux_order_ids_${user.uid}`;
+        const saved = JSON.parse(window.localStorage.getItem(key) || "[]");
+        const ids = Array.isArray(saved) ? saved.filter((id) => typeof id === "string") : [];
+        window.localStorage.setItem(key, JSON.stringify(Array.from(new Set([...ids, orderRef.id])).slice(-1000)));
+      } catch (e) {
+        console.warn("local order id save skipped", e);
+      }
       cart.clear();
       toast.success(t("order_placed"));
       router.navigate({ to: "/orders" });

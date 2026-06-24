@@ -5,6 +5,15 @@ import { Layout } from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
 import { getFirebase } from "../lib/firebase";
 
+function getSavedOrderIds(uid: string) {
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(`chocolux_order_ids_${uid}`) || "[]");
+    return Array.isArray(saved) ? saved.filter((id) => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 export const Route = createFileRoute("/orders")({
   head: () => ({
     meta: [
@@ -44,9 +53,10 @@ function Orders() {
         }
         if (map.size === 0) {
           const profileSnap = await getDoc(doc(db, "users", user.uid));
-          const orderIds = profileSnap.exists() && Array.isArray((profileSnap.data() as any).orderIds)
+          const profileOrderIds = profileSnap.exists() && Array.isArray((profileSnap.data() as any).orderIds)
             ? (profileSnap.data() as any).orderIds.slice(-1000)
             : [];
+          const orderIds = Array.from(new Set([...profileOrderIds, ...getSavedOrderIds(user.uid)])).slice(-1000);
           const savedOrders = await Promise.all(
             orderIds.map(async (id: string) => {
               try {
