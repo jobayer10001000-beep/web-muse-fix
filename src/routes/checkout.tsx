@@ -31,6 +31,9 @@ function Checkout() {
   const { t } = useLang();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [delivery, setDelivery] = useState<{ defaultCharge: number; perDistrict: Record<string, number>; freeAbove: number }>({
+    defaultCharge: 80, perDistrict: {}, freeAbove: 0,
+  });
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -47,11 +50,29 @@ function Checkout() {
     if (!loading && !user) router.navigate({ to: "/login" });
   }, [loading, user, router]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { db } = getFirebase();
+        const snap = await getDoc(doc(db, "settings", "delivery"));
+        if (snap.exists()) {
+          const d = snap.data() as any;
+          setDelivery({
+            defaultCharge: Number(d.defaultCharge ?? 80),
+            perDistrict: d.perDistrict ?? {},
+            freeAbove: Number(d.freeAbove ?? 0),
+          });
+        }
+      } catch (e) { console.error("delivery load", e); }
+    })();
+  }, []);
+
   const districts = useMemo(() => getDistricts(form.division), [form.division]);
   const upazilas = useMemo(() => getUpazilas(form.division, form.district), [form.division, form.district]);
 
   const subtotal = cart.total;
-  const shipping = subtotal >= 75 || subtotal === 0 ? 0 : 7.99;
+  const districtCharge = form.district ? (delivery.perDistrict[form.district] ?? delivery.defaultCharge) : delivery.defaultCharge;
+  const shipping = subtotal === 0 ? 0 : (delivery.freeAbove > 0 && subtotal >= delivery.freeAbove ? 0 : districtCharge);
   const total = subtotal + shipping;
 
   async function placeOrder(e: React.FormEvent) {
